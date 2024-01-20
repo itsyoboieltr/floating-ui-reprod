@@ -28,6 +28,7 @@ export function Tooltip(
   const [floating, setFloating] = createSignal<HTMLElement>();
   const position = useFloating(reference, floating, {
     placement: 'top',
+    strategy: 'fixed',
     whileElementsMounted: autoUpdate,
     middleware: [offset(5), flip(), shift()],
     ...props.options,
@@ -48,12 +49,11 @@ export function Tooltip(
         <Portal>
           <div
             style={{
-              display: showTooltip() || isAnimating() ? 'block' : 'none',
               top: position.y ? `${position.y}px` : undefined,
               left: position.x ? `${position.x}px` : undefined,
             }}
             class={cn(
-              'pointer-events-none absolute animate-fade-in cursor-auto select-none rounded bg-black/60 p-2 text-sm text-white shadow',
+              'pointer-events-none fixed animate-fade-in cursor-auto select-none rounded bg-black/60 p-2 text-sm text-white shadow',
               { 'animate-fade-out': isAnimating() },
               props.class?.tooltip,
             )}
