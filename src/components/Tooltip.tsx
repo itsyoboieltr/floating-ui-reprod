@@ -1,4 +1,4 @@
-import { JSX, createSignal, splitProps } from 'solid-js';
+import { JSX, Show, createSignal, splitProps } from 'solid-js';
 import { useFloating, UseFloatingOptions } from 'solid-floating-ui';
 import { autoUpdate, flip, offset, shift } from '@floating-ui/dom';
 import { Portal } from 'solid-js/web';
@@ -44,25 +44,27 @@ export function Tooltip(
       }}
       class={cn('w-fit', props.class?.style)}>
       {props.children}
-      <Portal mount={showTooltip() || isAnimating() ? undefined : reference()}>
-        <div
-          style={{
-            display: showTooltip() || isAnimating() ? 'block' : 'none',
-            top: position.y ? `${position.y}px` : undefined,
-            left: position.x ? `${position.x}px` : undefined,
-          }}
-          class={cn(
-            'animate-fade-in pointer-events-none absolute cursor-auto select-none rounded bg-black/60 p-2 text-sm text-white shadow',
-            { 'animate-fade-out': isAnimating() },
-            props.class?.tooltip,
-          )}
-          onAnimationEnd={({ animationName }) => {
-            if (animationName === 'fade-out') setIsAnimating(false);
-          }}
-          ref={setFloating}>
-          {props.content}
-        </div>
-      </Portal>
+      <Show when={showTooltip() || isAnimating()}>
+        <Portal>
+          <div
+            style={{
+              display: showTooltip() || isAnimating() ? 'block' : 'none',
+              top: position.y ? `${position.y}px` : undefined,
+              left: position.x ? `${position.x}px` : undefined,
+            }}
+            class={cn(
+              'pointer-events-none absolute animate-fade-in cursor-auto select-none rounded bg-black/60 p-2 text-sm text-white shadow',
+              { 'animate-fade-out': isAnimating() },
+              props.class?.tooltip,
+            )}
+            onAnimationEnd={({ animationName }) => {
+              if (animationName === 'fade-out') setIsAnimating(false);
+            }}
+            ref={setFloating}>
+            {props.content}
+          </div>
+        </Portal>
+      </Show>
     </div>
   );
 }
