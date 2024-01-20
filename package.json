@@ -27,18 +27,23 @@
   },
   "dependencies": {
     "@elysiajs/eden": "0.8.1",
+    "@floating-ui/dom": "^1.5.4",
     "@paralleldrive/cuid2": "2.2.2",
+    "@solid-primitives/scheduled": "^1.4.2",
     "@solidjs/router": "0.10.9",
     "@solidjs/start": "0.4.10",
     "@tanstack/solid-query": "5.17.15",
+    "clsx": "^2.1.0",
+    "drizzle-kit": "0.20.13",
     "drizzle-orm": "0.29.3",
     "drizzle-typebox": "0.1.1",
     "elysia": "0.8.9",
-    "postgres": "3.4.3",
-    "solid-js": "1.8.11",
-    "vinxi": "0.1.4",
     "pg": "8.11.3",
-    "drizzle-kit": "0.20.13"
+    "postgres": "3.4.3",
+    "solid-floating-ui": "^0.3.0",
+    "solid-js": "1.8.11",
+    "tailwind-merge": "^2.2.0",
+    "vinxi": "0.1.4"
   },
   "eslintConfig": {
     "root": true,
